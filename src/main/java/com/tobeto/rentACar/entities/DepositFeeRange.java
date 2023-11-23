@@ -1,4 +1,4 @@
-package com.tobeto.java1aintro.entities;
+package com.tobeto.rentACar.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

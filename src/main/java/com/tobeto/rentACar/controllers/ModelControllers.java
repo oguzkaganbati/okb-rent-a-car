@@ -1,38 +1,21 @@
-package com.tobeto.java1aintro.controllers;
+package com.tobeto.rentACar.controllers;
 
-import com.tobeto.java1aintro.entities.Model;
-import com.tobeto.java1aintro.repositories.ModelRepository;
+import com.tobeto.rentACar.services.abstracts.ModelService;
+import com.tobeto.rentACar.services.dtos.model.requests.AddModelRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("api/models")
 public class ModelControllers {
-    private final ModelRepository modelRepository;
+    private ModelService modelService;
 
-    public ModelControllers(ModelRepository modelRepository) {
-        this.modelRepository = modelRepository;
-    }
-
-    @GetMapping
-    public List<Model> getAll(){
-        return modelRepository.findAll();
-    }
-
-    @GetMapping("{id}")
-
-    public Model getById(@PathVariable int id){
-       return modelRepository.findById(id).orElseThrow();
+    public ModelControllers(ModelService modelService) {
+        this.modelService = modelService;
     }
 
     @PostMapping
-    public void add(@RequestBody Model model){
-        modelRepository.save(model);
-    }
-
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        Model modelToDelete = modelRepository.findById(id).orElseThrow();
+    public void add(@RequestBody AddModelRequest addModelRequest){
+        modelService.add(addModelRequest);
     }
 }

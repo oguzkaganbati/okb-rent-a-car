@@ -1,37 +1,23 @@
-package com.tobeto.java1aintro.controllers;
+package com.tobeto.rentACar.controllers;
 
-import com.tobeto.java1aintro.entities.PaymentType;
-import com.tobeto.java1aintro.repositories.PaymentTypeRepository;
+
+import com.tobeto.rentACar.services.abstracts.PaymentTypeService;
+import com.tobeto.rentACar.services.dtos.payment_type.requests.AddPaymentTypeRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @RestController
 @RequestMapping("api/payment_types")
 public class PaymentTypeControllers {
-    private final PaymentTypeRepository paymentTypeRepository;
+    private PaymentTypeService paymentTypeService;
 
-    public PaymentTypeControllers(PaymentTypeRepository paymentTypeRepository) {
-        this.paymentTypeRepository = paymentTypeRepository;
-    }
-
-    @GetMapping
-    public List<PaymentType> getAll(){
-        return paymentTypeRepository.findAll();
-    }
-
-    @GetMapping("{id}")
-    public PaymentType getById(@PathVariable int id){
-        return paymentTypeRepository.findById(id).orElseThrow();
+    public PaymentTypeControllers(PaymentTypeService paymentTypeService) {
+        this.paymentTypeService = paymentTypeService;
     }
 
     @PostMapping
-    public void add(@RequestBody PaymentType paymentType){
-        paymentTypeRepository.save(paymentType);
-    }
-
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        PaymentType paymentTypeToDelete = paymentTypeRepository.findById(id).orElseThrow();
+    public void add(@RequestBody AddPaymentTypeRequest addPaymentTypeRequest){
+        paymentTypeService.add(addPaymentTypeRequest);
     }
 }

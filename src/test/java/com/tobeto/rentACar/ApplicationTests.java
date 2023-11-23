@@ -1,4 +1,4 @@
-package com.tobeto.java1aintro;
+package com.tobeto.rentACar;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

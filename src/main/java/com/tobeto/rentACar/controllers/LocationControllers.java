@@ -1,38 +1,33 @@
-package com.tobeto.java1aintro.controllers;
+package com.tobeto.rentACar.controllers;
 
-import com.tobeto.java1aintro.entities.Location;
-import com.tobeto.java1aintro.repositories.LocationRepository;
+
+import com.tobeto.rentACar.services.abstracts.LocationService;
+import com.tobeto.rentACar.services.dtos.location.requests.AddLocationRequest;
+import com.tobeto.rentACar.services.dtos.location.requests.DeleteLocationRequest;
+import com.tobeto.rentACar.services.dtos.location.requests.UpdateLocationRequest;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/locations")
 public class LocationControllers {
-    private final LocationRepository locationRepository;
+    private LocationService locationService;
 
-    public LocationControllers(LocationRepository locationRepository) {
-        this.locationRepository = locationRepository;
-    }
-
-    @GetMapping
-    public List<Location> getAll(){
-        return locationRepository.findAll();
-    }
-
-    @GetMapping("{id}")
-    public Location getById(@PathVariable int id){
-        return locationRepository.findById(id).orElseThrow();
+    public LocationControllers(LocationService locationService) {
+        this.locationService = locationService;
     }
 
     @PostMapping
-    public void add(@RequestBody Location location){
-        locationRepository.save(location);
+    public void add(@RequestBody AddLocationRequest addLocationRequest){
+        locationService.add(addLocationRequest);
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        Location locationToDelete = locationRepository.findById(id).orElseThrow();
+    @DeleteMapping("/delete")
+    public void delete(@RequestBody DeleteLocationRequest deleteLocationRequest){
+        locationService.delete(deleteLocationRequest);
     }
 
+    @PutMapping("/update")
+    public void update(@RequestBody UpdateLocationRequest updateLocationRequest){
+        locationService.update(updateLocationRequest);
+    }
 }

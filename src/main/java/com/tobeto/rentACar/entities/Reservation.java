@@ -1,4 +1,4 @@
-package com.tobeto.java1aintro.entities;
+package com.tobeto.rentACar.entities;
 
 import jakarta.persistence.*;
 import lombok.Getter;

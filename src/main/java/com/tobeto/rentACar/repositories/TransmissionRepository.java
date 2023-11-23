@@ -1,6 +1,6 @@
-package com.tobeto.java1aintro.repositories;
+package com.tobeto.rentACar.repositories;
 
-import com.tobeto.java1aintro.entities.Transmission;
+import com.tobeto.rentACar.entities.Transmission;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TransmissionRepository extends JpaRepository<Transmission, Integer>

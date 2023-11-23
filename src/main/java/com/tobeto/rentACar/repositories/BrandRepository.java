@@ -1,6 +1,6 @@
-package com.tobeto.java1aintro.repositories;
+package com.tobeto.rentACar.repositories;
 
-import com.tobeto.java1aintro.entities.Brand;
+import com.tobeto.rentACar.entities.Brand;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 //Generic

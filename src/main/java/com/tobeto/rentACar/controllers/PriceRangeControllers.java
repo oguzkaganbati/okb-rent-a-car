@@ -1,38 +1,22 @@
-package com.tobeto.java1aintro.controllers;
+package com.tobeto.rentACar.controllers;
 
-import com.tobeto.java1aintro.entities.PriceRange;
-import com.tobeto.java1aintro.repositories.PriceRangeRepository;
-import org.hibernate.sql.Delete;
+
+import com.tobeto.rentACar.services.abstracts.PriceRangeService;
+import com.tobeto.rentACar.services.dtos.price_range.requests.AddPriceRangeRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("api/price_ranges")
 public class PriceRangeControllers {
-    private final PriceRangeRepository priceRangeRepository;
+    private PriceRangeService priceRangeService;
 
-    public PriceRangeControllers(PriceRangeRepository priceRangeRepository) {
-        this.priceRangeRepository = priceRangeRepository;
-    }
-
-    @GetMapping
-    public List<PriceRange> getAll(){
-        return priceRangeRepository.findAll();
-    }
-
-    @GetMapping("{id}")
-    public PriceRange findById(@PathVariable int id){
-        return priceRangeRepository.findById(id).orElseThrow();
+    public PriceRangeControllers(PriceRangeService priceRangeService) {
+        this.priceRangeService = priceRangeService;
     }
 
     @PostMapping
-    public void add(@RequestBody PriceRange priceRange){
-        priceRangeRepository.save(priceRange);
-    }
-
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        PriceRange priceRangeToDelete = priceRangeRepository.findById(id).orElseThrow();
+    public void add(@RequestBody AddPriceRangeRequest addPriceRangeRequest){
+        priceRangeService.add(addPriceRangeRequest);
     }
 }

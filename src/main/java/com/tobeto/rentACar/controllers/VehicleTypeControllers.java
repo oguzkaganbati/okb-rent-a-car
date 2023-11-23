@@ -1,40 +1,23 @@
-package com.tobeto.java1aintro.controllers;
+package com.tobeto.rentACar.controllers;
 
-import com.tobeto.java1aintro.entities.VehicleType;
-import com.tobeto.java1aintro.repositories.VehicleTypeRepository;
+
+import com.tobeto.rentACar.services.abstracts.VehicleTypeService;
+import com.tobeto.rentACar.services.dtos.vehicle_type.requests.AddVehicleTypeRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @RestController
 @RequestMapping("api/vehicle_types")
 public class VehicleTypeControllers {
+    private VehicleTypeService vehicleTypeService;
 
-    private final VehicleTypeRepository vehicleTypeRepository;
-
-    public VehicleTypeControllers(VehicleTypeRepository vehicleTypeRepository) {
-        this.vehicleTypeRepository = vehicleTypeRepository;
-    }
-
-    @GetMapping
-    public List<VehicleType> getAll(){
-        return vehicleTypeRepository.findAll();
-    }
-
-    @GetMapping("{id}")
-    public VehicleType getById(@PathVariable int id){
-      return  vehicleTypeRepository.findById(id).orElseThrow();
+    public VehicleTypeControllers(VehicleTypeService vehicleTypeService) {
+        this.vehicleTypeService = vehicleTypeService;
     }
 
     @PostMapping
-    public void add(@RequestBody VehicleType vehicleType){
-        vehicleTypeRepository.save(vehicleType);
+    public void add(@RequestBody AddVehicleTypeRequest addVehicleTypeRequest){
+        vehicleTypeService.add(addVehicleTypeRequest);
     }
-
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        VehicleType vehicleTypeToDelete = vehicleTypeRepository.findById(id).orElseThrow();
-    }
-
-
 }

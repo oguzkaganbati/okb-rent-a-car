@@ -1,40 +1,34 @@
-package com.tobeto.java1aintro.controllers;
+package com.tobeto.rentACar.controllers;
 
-import com.tobeto.java1aintro.entities.Fuel;
-import com.tobeto.java1aintro.repositories.FuelRepository;
+
+import com.tobeto.rentACar.services.abstracts.FuelService;
+import com.tobeto.rentACar.services.dtos.fuel.requests.AddFuelRequest;
+import com.tobeto.rentACar.services.dtos.fuel.requests.DeleteFuelRequest;
+import com.tobeto.rentACar.services.dtos.fuel.requests.UpdateFuelRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("api/fuels")
 public class FuelControllers {
+    private FuelService fuelService;
 
-    private final FuelRepository fuelRepository;
-
-    public FuelControllers(FuelRepository fuelRepository) {
-        this.fuelRepository = fuelRepository;
-    }
-
-    @GetMapping
-
-    public List<Fuel> getAll(){
-        return fuelRepository.findAll();
-    }
-
-    @GetMapping({"id"})
-    public Fuel getById(@PathVariable int id){
-        return fuelRepository.findById(id).orElseThrow();
+    public FuelControllers(FuelService fuelService) {
+        this.fuelService = fuelService;
     }
 
     @PostMapping
-    public void add(@RequestBody Fuel fuel){
-        fuelRepository.save(fuel);
+    public void add(@RequestBody AddFuelRequest addFuelRequest){
+        fuelService.add(addFuelRequest);
     }
 
-    @DeleteMapping({"id"})
-    public void delete(@PathVariable int id){
-        Fuel fuelToDelete = fuelRepository.findById(id).orElseThrow();
+    @DeleteMapping("/delete")
+    public void delete(@RequestBody DeleteFuelRequest deleteFuelRequest){
+        fuelService.delete(deleteFuelRequest);
     }
 
+    @PutMapping("/update")
+    public void update(@RequestBody UpdateFuelRequest updateFuelRequest){
+        fuelService.update(updateFuelRequest);
+    }
 }

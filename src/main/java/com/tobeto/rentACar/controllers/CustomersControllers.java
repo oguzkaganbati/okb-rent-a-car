@@ -1,39 +1,35 @@
-package com.tobeto.java1aintro.controllers;
+package com.tobeto.rentACar.controllers;
 
-import com.tobeto.java1aintro.entities.Customer;
-import com.tobeto.java1aintro.repositories.CustomerRepository;
+
+import com.tobeto.rentACar.services.abstracts.CustomerService;
+import com.tobeto.rentACar.services.dtos.customer.requests.AddCustomerRequest;
+import com.tobeto.rentACar.services.dtos.customer.requests.DeleteCustomerRequest;
+import com.tobeto.rentACar.services.dtos.customer.requests.UpdateCustomerRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("api/customers")
 public class CustomersControllers {
-    private final CustomerRepository customerRepository;
 
-    public CustomersControllers(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
-    }
+    private CustomerService customerService;
 
-    @GetMapping
-    public List<Customer> getAll(){
-        return customerRepository.findAll();
-    }
-
-    @GetMapping("{id}")
-    public Customer getById(@PathVariable int id){
-        return  customerRepository.findById(id).orElseThrow();
+    public CustomersControllers(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
     @PostMapping
-    public void add(@RequestBody Customer customer){
-        customerRepository.save(customer);
+    public void add(@RequestBody AddCustomerRequest addCustomerRequest){
+        customerService.add(addCustomerRequest);
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        Customer customerToDelete = customerRepository.findById(id).orElseThrow();
+    @DeleteMapping("/delete")
+    public void delete(@RequestBody DeleteCustomerRequest deleteCustomerRequest){
+        customerService.delete(deleteCustomerRequest);
+    }
 
-        customerRepository.delete(customerToDelete);
+    @PutMapping("/update")
+    public void update(@RequestBody UpdateCustomerRequest updateCustomerRequest){
+        customerService.update(updateCustomerRequest);
     }
 }

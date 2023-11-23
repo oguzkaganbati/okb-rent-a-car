@@ -1,38 +1,23 @@
-package com.tobeto.java1aintro.controllers;
+package com.tobeto.rentACar.controllers;
 
-import com.tobeto.java1aintro.entities.RentalType;
-import com.tobeto.java1aintro.repositories.RentalTypeRepository;
+
+import com.tobeto.rentACar.services.abstracts.RentalTypeService;
+import com.tobeto.rentACar.services.dtos.rental_type.requests.AddRentalTypeRequest;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 @RestController
 @RequestMapping("api/rental_types")
 public class RentalTypeControllers {
-    private final RentalTypeRepository rentalTypeRepository;
+    private RentalTypeService rentalTypeService;
 
-    public RentalTypeControllers(RentalTypeRepository rentalTypeRepository) {
-        this.rentalTypeRepository = rentalTypeRepository;
-    }
-
-    @GetMapping
-    public List<RentalType> getAll(){
-      return  rentalTypeRepository.findAll();
-    }
-
-    @GetMapping("{id}")
-    public RentalType getById(@PathVariable int id){
-        return rentalTypeRepository.findById(id).orElseThrow();
+    public RentalTypeControllers(RentalTypeService rentalTypeService) {
+        this.rentalTypeService = rentalTypeService;
     }
 
     @PostMapping
-    public void add(@RequestBody RentalType rentalType){
-        rentalTypeRepository.save(rentalType);
+    public void add(@RequestBody AddRentalTypeRequest addRentalTypeRequest){
+        rentalTypeService.add(addRentalTypeRequest);
     }
-
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable int id){
-        RentalType rentalTypeToDeleted = rentalTypeRepository.findById(id).orElseThrow();
-    }
-
 }

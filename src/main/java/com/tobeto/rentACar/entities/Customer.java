@@ -1,11 +1,10 @@
-package com.tobeto.java1aintro.entities;
+package com.tobeto.rentACar.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
