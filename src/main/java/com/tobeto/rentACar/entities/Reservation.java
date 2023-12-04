@@ -26,6 +26,7 @@ public class Reservation
     @Column(name = "dropoff_date")
     private LocalDateTime dropoffDate;
 
+
     @ManyToOne
     @JoinColumn(name = "pickup_time_id")
     private Time pickupTime;
@@ -57,6 +58,10 @@ public class Reservation
     @ManyToOne
     @JoinColumn(name = "payment_type_id")
     private PaymentType paymentType;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private ReservationStatus reservationStatus;
 
 
 }
