@@ -6,7 +6,7 @@ import com.tobeto.rentACar.services.abstracts.BrandService;
 import com.tobeto.rentACar.services.dtos.brand.requests.AddBrandRequest;
 import com.tobeto.rentACar.services.dtos.brand.requests.DeleteBrandRequest;
 import com.tobeto.rentACar.services.dtos.brand.requests.UpdateBrandRequest;
-import com.tobeto.rentACar.services.dtos.brand.responses.GetAllBrandResponse;
+import com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,8 +40,15 @@ public class BrandManager implements BrandService {
     }
 
     @Override
-    public List<GetAllBrandResponse> getByNameDto(String brandName) {
-        return brandRepository.findByName(brandName);
+    public List<Brand> getByBrandName(String brandName) {
+        return brandRepository.findByBrandNameStartingWith(brandName);
+    }
+
+    @Override
+    public List<GetListBrandResponse> getByBrandNameDto(String brandName) {
+        return brandRepository.findByBrandNameStartingWith(brandName).stream().map(brand -> {
+        return new GetListBrandResponse(brand.getId(), brand.getBrandName());
+        }).toList();
     }
 
 

@@ -3,7 +3,7 @@ package com.tobeto.rentACar.controllers;
 
 
 import com.tobeto.rentACar.services.abstracts.ReservationService;
-import com.tobeto.rentACar.services.dtos.reservation.responses.FindActiveReservationResponse;
+import com.tobeto.rentACar.services.dtos.reservation.responses.GetListActiveReservationResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +17,10 @@ public class ReservationControllers {
         this.reservationService = reservationService;
     }
 
+    @GetMapping("/dto/byActiveReservation")
+    List<GetListActiveReservationResponse> getByActiveReservationDto(@RequestParam String statusName){
+        return reservationService.getByActiveReservationDto(statusName);
+    }
 
 
 }

@@ -1,10 +1,11 @@
 package com.tobeto.rentACar.controllers;
 
+import com.tobeto.rentACar.entities.Brand;
 import com.tobeto.rentACar.services.abstracts.BrandService;
 import com.tobeto.rentACar.services.dtos.brand.requests.AddBrandRequest;
 import com.tobeto.rentACar.services.dtos.brand.requests.DeleteBrandRequest;
 import com.tobeto.rentACar.services.dtos.brand.requests.UpdateBrandRequest;
-import com.tobeto.rentACar.services.dtos.brand.responses.GetAllBrandResponse;
+import com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +20,16 @@ public class BrandsController {// directing and controlling the request
         this.brandService = brandService;
     }
 
-    @GetMapping("dto")
-    public List<GetAllBrandResponse> getByNameDto(@RequestParam String brandName){
-        return brandService.getByNameDto(brandName);
+
+    @GetMapping("/dto")
+    public List<GetListBrandResponse> getBrandByDto(@RequestParam String brandName){
+        return brandService.getByBrandNameDto(brandName);
+    }
+
+
+    @GetMapping
+    public List<Brand> getBrandByName(@RequestParam String brandName){
+        return brandService.getByBrandName(brandName);
     }
 
     @PostMapping

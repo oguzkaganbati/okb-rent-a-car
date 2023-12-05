@@ -1,14 +1,12 @@
 package com.tobeto.rentACar.services.concretes;
 
-import com.tobeto.rentACar.entities.Brand;
-import com.tobeto.rentACar.entities.Reservation;
 import com.tobeto.rentACar.repositories.ReservationRepository;
 import com.tobeto.rentACar.services.abstracts.ReservationService;
-import com.tobeto.rentACar.services.dtos.reservation.requests.AddReservationRequest;
-import com.tobeto.rentACar.services.dtos.reservation.responses.FindActiveReservationResponse;
+import com.tobeto.rentACar.services.dtos.reservation.responses.GetListActiveReservationResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class ReservationManager implements ReservationService {
 
     private final ReservationRepository reservationRepository;
@@ -17,15 +15,9 @@ public class ReservationManager implements ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
-    @Override
-    public void add(AddReservationRequest request) {
-        Reservation reservation = new Reservation();
-        reservation.setId(request.getId());
-        reservationRepository.save(reservation);
-    }
 
     @Override
-    public List<FindActiveReservationResponse> getByIdDto(Integer status_id) {
-        return null;
+    public List<GetListActiveReservationResponse> getByActiveReservationDto(String statusName) {
+        return reservationRepository.findReservationsByStatusName(statusName);
     }
 }
