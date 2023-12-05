@@ -3,6 +3,7 @@ package com.tobeto.rentACar.controllers;
 
 import com.tobeto.rentACar.services.abstracts.VehicleTypeService;
 import com.tobeto.rentACar.services.dtos.vehicle_type.requests.AddVehicleTypeRequest;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -17,7 +18,7 @@ public class VehicleTypeControllers {
     }
 
     @PostMapping
-    public void add(@RequestBody AddVehicleTypeRequest addVehicleTypeRequest){
+    public void add(@RequestBody @Valid AddVehicleTypeRequest addVehicleTypeRequest){
         vehicleTypeService.add(addVehicleTypeRequest);
     }
 }

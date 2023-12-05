@@ -38,4 +38,9 @@ public class DepositFeeRangeManager implements DepositFeeRangeService {
         depositFeeRangeToUpdate.setDepositFeeRange(updateDepositFeeRangeRequest.getDepositFeeRangeName());
         depositFeeRangeRepository.saveAndFlush(depositFeeRangeToUpdate);
     }
+
+    @Override
+    public DepositFeeRange getById(int id) {
+        return depositFeeRangeRepository.findById(id).orElseThrow();
+    }
 }

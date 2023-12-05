@@ -3,6 +3,7 @@ package com.tobeto.rentACar.controllers;
 
 import com.tobeto.rentACar.services.abstracts.MileageLimitRangeService;
 import com.tobeto.rentACar.services.dtos.mileage_limit_range.requests.AddMileageLimitRangeRequest;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,7 +17,7 @@ public class MileageLimitRangeControllers {
     }
 
     @PostMapping
-    public void add(@RequestBody AddMileageLimitRangeRequest addMileageLimitRangeRequest){
+    public void add(@RequestBody @Valid AddMileageLimitRangeRequest addMileageLimitRangeRequest){
         mileageLimitRangeService.add(addMileageLimitRangeRequest);
     }
 }

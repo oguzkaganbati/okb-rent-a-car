@@ -2,6 +2,7 @@ package com.tobeto.rentACar.controllers;
 
 import com.tobeto.rentACar.services.abstracts.ModelService;
 import com.tobeto.rentACar.services.dtos.model.requests.AddModelRequest;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -15,7 +16,7 @@ public class ModelControllers {
     }
 
     @PostMapping
-    public void add(@RequestBody AddModelRequest addModelRequest){
+    public void add(@RequestBody @Valid AddModelRequest addModelRequest){
         modelService.add(addModelRequest);
     }
 }

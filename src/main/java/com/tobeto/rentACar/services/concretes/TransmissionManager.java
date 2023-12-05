@@ -20,4 +20,9 @@ public class TransmissionManager implements TransmissionService {
         transmission.setTransmissionName(addTransmissionRequest.getTransmissionName());
 
     }
+
+    @Override
+    public Transmission getById(int id) {
+        return transmissionRepository.findById(id).orElseThrow();
+    }
 }

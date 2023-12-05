@@ -36,4 +36,9 @@ public class FuelManager implements FuelService {
         Fuel fuelToUpdate = fuelRepository.findById(updateFuelRequest.getFuelId()).orElseThrow();
         fuelToUpdate.setFuelName(updateFuelRequest.getFuelName());
     }
+
+    @Override
+    public Fuel getById(int id) {
+        return fuelRepository.findById(id).orElseThrow();
+    }
 }

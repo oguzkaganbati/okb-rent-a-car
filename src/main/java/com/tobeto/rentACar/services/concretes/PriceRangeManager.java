@@ -21,4 +21,9 @@ public class PriceRangeManager implements PriceRangeService {
         priceRange.setPriceRange(addPriceRangeRequest.getPriceRangeName());
 
     }
+
+    @Override
+    public PriceRange getById(int id) {
+        return priceRangeRepository.findById(id).orElseThrow();
+    }
 }

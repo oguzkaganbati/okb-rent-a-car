@@ -3,6 +3,7 @@ package com.tobeto.rentACar.controllers;
 
 import com.tobeto.rentACar.services.abstracts.TransmissionService;
 import com.tobeto.rentACar.services.dtos.transmission.requests.AddTransmissionRequest;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -17,7 +18,7 @@ public class TransmissionControllers {
     }
 
     @PostMapping
-    public void add(@RequestBody AddTransmissionRequest addTransmissionRequest){
+    public void add(@RequestBody @Valid AddTransmissionRequest addTransmissionRequest){
         transmissionService.add(addTransmissionRequest);
     }
 }

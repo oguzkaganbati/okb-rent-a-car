@@ -3,6 +3,7 @@ package com.tobeto.rentACar.controllers;
 
 import com.tobeto.rentACar.services.abstracts.RentalTypeService;
 import com.tobeto.rentACar.services.dtos.rental_type.requests.AddRentalTypeRequest;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -17,7 +18,7 @@ public class RentalTypeControllers {
     }
 
     @PostMapping
-    public void add(@RequestBody AddRentalTypeRequest addRentalTypeRequest){
+    public void add(@RequestBody @Valid AddRentalTypeRequest addRentalTypeRequest){
         rentalTypeService.add(addRentalTypeRequest);
     }
 }

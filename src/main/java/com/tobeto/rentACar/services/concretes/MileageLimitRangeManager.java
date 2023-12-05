@@ -21,4 +21,9 @@ public class MileageLimitRangeManager implements MileageLimitRangeService {
         mileageLimitRange.setMileageLimitRange(addMileageLimitRangeRequest.getMileAgeLimitName());
 
     }
+
+    @Override
+    public MileageLimitRange getById(int id) {
+        return mileageLimitRangeRepository.findById(id).orElseThrow();
+    }
 }

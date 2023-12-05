@@ -21,4 +21,9 @@ public class VehicleTypeManager implements VehicleTypeService {
         vehicleType.setVehicleTypeName(addVehicleTypeRequest.getVehicleTypeName());
 
     }
+
+    @Override
+    public VehicleType getById(int id) {
+        return vehicleTypeRepository.findById(id).orElseThrow();
+    }
 }

@@ -39,6 +39,9 @@ public class Vehicle
     @Column(name = "deposit_fee")
     private BigDecimal depositFee;
 
+    @Column(name = "plate")
+    private String plate;
+
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;

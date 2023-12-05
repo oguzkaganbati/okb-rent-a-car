@@ -20,4 +20,9 @@ public class ModelManager implements ModelService {
         Model model = new Model();
         model.setModelName(addModelRequest.getModelName());
     }
+
+    @Override
+    public Model getById(int id) {
+        return modelRepository.findById(id).orElseThrow();
+    }
 }

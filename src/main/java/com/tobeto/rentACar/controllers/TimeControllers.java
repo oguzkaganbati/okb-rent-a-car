@@ -3,6 +3,7 @@ package com.tobeto.rentACar.controllers;
 
 import com.tobeto.rentACar.services.abstracts.TimeService;
 import com.tobeto.rentACar.services.dtos.time.requests.AddTimeRequest;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,7 +16,7 @@ public class TimeControllers {
     }
 
     @PostMapping
-    public void add(AddTimeRequest addTimeRequest){
+    public void add(@RequestParam @Valid AddTimeRequest addTimeRequest){
         timeService.add(addTimeRequest);
     }
 }

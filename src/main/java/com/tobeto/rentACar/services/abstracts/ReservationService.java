@@ -1,12 +1,14 @@
 package com.tobeto.rentACar.services.abstracts;
 
-import com.tobeto.rentACar.services.dtos.brand.requests.AddBrandRequest;
-import com.tobeto.rentACar.services.dtos.reservation.requests.AddReservationRequest;
-import com.tobeto.rentACar.services.dtos.reservation.responses.FindActiveReservationResponse;
+
+import com.tobeto.rentACar.services.dtos.reservation.responses.GetListActiveReservationResponse;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+@Service
 
 public interface ReservationService {
-    void add(AddReservationRequest request);
-    List<FindActiveReservationResponse> getByIdDto(Integer status_id);
+
+    List<GetListActiveReservationResponse> getByActiveReservationDto(String statusName);
+
 }

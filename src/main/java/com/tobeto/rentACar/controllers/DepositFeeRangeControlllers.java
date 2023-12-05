@@ -5,6 +5,7 @@ import com.tobeto.rentACar.services.abstracts.DepositFeeRangeService;
 import com.tobeto.rentACar.services.dtos.deposit_fee_range.requests.AddDepositFeeRangeRequest;
 import com.tobeto.rentACar.services.dtos.deposit_fee_range.requests.DeleteDepositFeeRangeRequest;
 import com.tobeto.rentACar.services.dtos.deposit_fee_range.requests.UpdateDepositFeeRangeRequest;
+import jakarta.validation.Valid;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,17 +21,17 @@ public class DepositFeeRangeControlllers
     }
 
     @PostMapping
-    public void add(@RequestBody AddDepositFeeRangeRequest addDepositFeeRangeRequest){
+    public void add(@RequestBody @Valid AddDepositFeeRangeRequest addDepositFeeRangeRequest){
         depositFeeRangeService.add(addDepositFeeRangeRequest);
     }
 
     @DeleteMapping("/delete")
-    public void delete(@RequestBody DeleteDepositFeeRangeRequest deleteDepositFeeRangeRequest){
+    public void delete(@RequestBody @Valid DeleteDepositFeeRangeRequest deleteDepositFeeRangeRequest){
         depositFeeRangeService.delete(deleteDepositFeeRangeRequest);
     }
 
     @PutMapping("/update")
-    public void update(@RequestBody UpdateDepositFeeRangeRequest updateDepositFeeRangeRequest){
+    public void update(@RequestBody @Valid UpdateDepositFeeRangeRequest updateDepositFeeRangeRequest){
         depositFeeRangeService.update(updateDepositFeeRangeRequest);
     }
 }

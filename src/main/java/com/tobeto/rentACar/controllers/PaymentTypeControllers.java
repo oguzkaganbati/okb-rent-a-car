@@ -3,6 +3,7 @@ package com.tobeto.rentACar.controllers;
 
 import com.tobeto.rentACar.services.abstracts.PaymentTypeService;
 import com.tobeto.rentACar.services.dtos.payment_type.requests.AddPaymentTypeRequest;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -17,7 +18,7 @@ public class PaymentTypeControllers {
     }
 
     @PostMapping
-    public void add(@RequestBody AddPaymentTypeRequest addPaymentTypeRequest){
+    public void add(@RequestBody @Valid AddPaymentTypeRequest addPaymentTypeRequest){
         paymentTypeService.add(addPaymentTypeRequest);
     }
 }
