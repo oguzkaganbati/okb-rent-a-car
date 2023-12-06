@@ -7,7 +7,9 @@ import com.tobeto.rentACar.services.dtos.brand.requests.AddBrandRequest;
 import com.tobeto.rentACar.services.dtos.brand.requests.DeleteBrandRequest;
 import com.tobeto.rentACar.services.dtos.brand.requests.UpdateBrandRequest;
 import com.tobeto.rentACar.services.dtos.brand.responses.GetListBrandResponse;
+
 import org.springframework.dao.DataIntegrityViolationException;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -54,11 +56,13 @@ public class BrandManager implements BrandService {
         return brandRepository.findByBrandNameStartingWith(brandName).stream().map(brand -> {
         return new GetListBrandResponse(brand.getId(), brand.getBrandName());
         }).toList();
+
     }
 
     @Override
     public Brand getById(int id) {
         return brandRepository.findById(id).orElseThrow();
+
     }
 
 

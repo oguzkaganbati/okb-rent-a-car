@@ -5,13 +5,15 @@ import com.tobeto.rentACar.repositories.VehicleRepository;
 import com.tobeto.rentACar.services.abstracts.*;
 import com.tobeto.rentACar.services.dtos.vehicle.requests.AddVehicleRequest;
 import com.tobeto.rentACar.services.dtos.vehicle.responses.GetVehicleListByFuelTypeResponse;
-import lombok.Data;
+import lombok.Value;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
-@Data
+@Value
 public class VehicleManager implements VehicleService {
 
     private final VehicleRepository vehicleRepository;
@@ -29,13 +31,12 @@ public class VehicleManager implements VehicleService {
         if (vehicleRepository.existsCarByPlate(addVehicleRequest.getPlate())) {
             throw new RuntimeException("A vehicle with the provided plate already exists. Please choose a unique plate number.");
         }
-
-    Vehicle vehicle = new Vehicle();
-    vehicle.setPricePerDay(addVehicleRequest.getPricePerDay());
-    vehicle.setPricePerMonth(addVehicleRequest.getPricePerMonth());
-    vehicle.setMileageLimit(addVehicleRequest.getMileageLimit());
-    vehicle.setDepositFee(addVehicleRequest.getDepositFee());
-    vehicle.setPlate(addVehicleRequest.getPlate());
+        Vehicle vehicle = new Vehicle();
+        vehicle.setPricePerDay(addVehicleRequest.getPricePerDay());
+        vehicle.setPricePerMonth(addVehicleRequest.getPricePerMonth());
+        vehicle.setMileageLimit(addVehicleRequest.getMileageLimit());
+        vehicle.setDepositFee(addVehicleRequest.getDepositFee());
+        vehicle.setPlate(addVehicleRequest.getPlate());
         Brand brand = brandService.getById(addVehicleRequest.getBrandId());
         vehicle.setBrand(brand);
         Model model = modelService.getById(addVehicleRequest.getModelId());
@@ -54,13 +55,10 @@ public class VehicleManager implements VehicleService {
         vehicle.setPriceRange(priceRange);
 
         vehicleRepository.save(vehicle);
-
-
-
     }
 
     @Override
-    public List<GetVehicleListByFuelTypeResponse> getByFuelNameDto(String fuelName) {
+    public List<GetVehicleListByFuelTypeResponse> getByFuelName(String fuelName) {
         return vehicleRepository.findByFuelName(fuelName);
     }
 }

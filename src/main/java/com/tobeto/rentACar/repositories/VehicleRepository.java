@@ -18,5 +18,5 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Integer> {
             "WHERE f.fuelName = :fuelName")
     List<GetVehicleListByFuelTypeResponse> findByFuelName(@Param("fuelName") String fuelName);
 
-    boolean existsCarByPlate(String plate);
-}
+
+    boolean existsCarByPlate(String plate);}

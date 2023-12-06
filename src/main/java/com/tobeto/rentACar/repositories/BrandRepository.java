@@ -17,5 +17,5 @@ public interface BrandRepository extends JpaRepository<Brand, Integer>
         //    "FROM Brand b WHERE b.brandName= :brandName")
     //List<GetListBrandResponse> findByName(String brandName);
 
-    boolean existsByBrandName(String brandName);
-}
+
+    boolean existsByBrandName(String brandName);}
